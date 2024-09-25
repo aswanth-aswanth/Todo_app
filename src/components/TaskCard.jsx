@@ -22,11 +22,11 @@ const TaskCard = () => {
   };
 
   return (
-    <div className="task-app flex gap-20 flex-wrap justify-center">
-      <TaskList title="Task" tasks={tasks.filter((task) => task.status === "tasks")} onDrop={(task) => handleDrop(task, "Task")} setTasks={setTasks} />
-      <TaskList title="Pending" tasks={tasks.filter((task) => task.status === "pending")} onDrop={(task) => handleDrop(task, "Pending")} setTasks={setTasks} />
-      <TaskList title="Completed" tasks={tasks.filter((task) => task.status === "completed")} onDrop={(task) => handleDrop(task, "Completed")} setTasks={setTasks} />
-    </div>
+    <div className="task-app flex flex-col sm:flex-row gap-8 sm:gap-20 flex-wrap justify-center w-full">
+    <TaskList title="Task" tasks={tasks.filter((task) => task.status === "tasks")} onDrop={(task) => handleDrop(task, "Task")} setTasks={setTasks} />
+    <TaskList title="Pending" tasks={tasks.filter((task) => task.status === "pending")} onDrop={(task) => handleDrop(task, "Pending")} setTasks={setTasks} />
+    <TaskList title="Completed" tasks={tasks.filter((task) => task.status === "completed")} onDrop={(task) => handleDrop(task, "Completed")} setTasks={setTasks} />
+  </div>
   );
 };
 

@@ -21,29 +21,31 @@ function Task({data}) {
         return `${minutes}m ${remainingSeconds}s`;
       };
   return (
-    <div className="min-h-[140px] flex justify-between px-6 items-center my-6 rounded-3xl bg-white max-w-[1100px] shadow-2xl  mx-auto">
-      <div className="flex gap-4 h-[60px] ">
-        <div>
-          <p className=" font-bold text-gray-600 text-lg">start</p>
-          <div className="flex items-center mt-2 gap-2">
-            <IoTimeOutline className="text-[#7800EF]" />
-            <p className=" text-[#7800EF] inline-block font-medium">{formatHourMinuteAMPM(data.startTime)}</p>
-          </div>
-        </div>
-        <div>
-          <p className=" font-bold text-gray-600 text-lg">end</p>
-          <div className="flex items-center mt-2 gap-2">
-            <IoTimeOutline className="text-[#7800EF]" />
-            <p className=" text-[#7800EF] font-medium">{formatHourMinuteAMPM(data.endTime)}</p>
-          </div>
+    <div className="min-h-[140px] flex flex-col sm:flex-row justify-between p-4 sm:px-6 items-center my-6 rounded-3xl bg-white max-w-[1100px] shadow-2xl mx-auto">
+    <div className="flex gap-4 h-[60px] mb-4 sm:mb-0">
+      <div>
+        <p className="font-bold text-gray-600 text-lg">start</p>
+        <div className="flex items-center mt-2 gap-2">
+          <IoTimeOutline className="text-[#7800EF]" />
+          <p className="text-[#7800EF] inline-block font-medium">{formatHourMinuteAMPM(data.startTime)}</p>
         </div>
       </div>
-      <p className="text-2xl text-gray-600 font-semibold max-w-[50%] overflow-auto">{data.title}</p>
-      <div className=" font-bold flex items-center flex-col justify-center bg-blue-500 py-2 rounded-lg shadow-lg  w-48">
-        <p className="text-white">Remaining time</p>
-        <p className=" text-yellow-300">{formatRemainingTime(data.remainingTime)}</p>
+      <div>
+        <p className="font-bold text-gray-600 text-lg">end</p>
+        <div className="flex items-center mt-2 gap-2">
+          <IoTimeOutline className="text-[#7800EF]" />
+          <p className="text-[#7800EF] font-medium">{formatHourMinuteAMPM(data.endTime)}</p>
+        </div>
       </div>
     </div>
+    <p className="text-xl sm:text-2xl text-gray-600 font-semibold max-w-full sm:max-w-[50%] overflow-auto text-center sm:text-left mb-4 sm:mb-0">
+      {data.title}
+    </p>
+    <div className="font-bold flex items-center flex-col justify-center bg-blue-500 py-2 rounded-lg shadow-lg w-full sm:w-48">
+      <p className="text-white">Remaining time</p>
+      <p className="text-yellow-300">{formatRemainingTime(data.remainingTime)}</p>
+    </div>
+  </div>
   );
 }
 

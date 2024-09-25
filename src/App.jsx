@@ -25,10 +25,13 @@ function App() {
   const handleAddTask = () => {
     const newTask = {
       ...task,
-      startTime: tasks.length > 0 ? tasks[tasks.length - 1].endTime : new Date(),
+      startTime:
+        tasks.length > 0 ? tasks[tasks.length - 1].endTime : new Date(),
     };
 
-    newTask.endTime = new Date(newTask.startTime.getTime() + newTask.remainingTime * 60000);
+    newTask.endTime = new Date(
+      newTask.startTime.getTime() + newTask.remainingTime * 60000
+    );
 
     setTasks([...tasks, newTask]);
     setTask(initialTask);
@@ -53,7 +56,10 @@ function App() {
       setTasks((prevTasks) =>
         prevTasks.map((t) => ({
           ...t,
-          remainingTime: Math.max(0, Math.round((t.endTime - new Date()) / 1000)), // remaining time in seconds
+          remainingTime: Math.max(
+            0,
+            Math.round((t.endTime - new Date()) / 1000)
+          ), // remaining time in seconds
         }))
       );
     }, 1000);
@@ -66,32 +72,59 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen select-none bg-gradient-to-r from-cyan-500 to-blue-500  pt-16">
-        <div className="flex justify-between text-white text-2xl font-bold px-28">
+      <div className="min-h-screen select-none bg-gradient-to-r from-cyan-500 to-blue-500 p-4 sm:p-8">
+        <div className="flex flex-col sm:flex-row justify-between text-white text-xl sm:text-2xl font-bold mb-8">
           <h1>Main tasks</h1>
-          <p>15 december 2023</p>
+          <p className="mt-2 sm:mt-0">15 december 2023</p>
         </div>
-        <div className="flex justify-center items-center mt-28 text-2xl font-bold  text-white mb-10">
-          <p className="mr-20">Tasks</p>
-          <div className="text-gray-600 flex items-center">
-            <input value={task.title} onChange={handleInputChange} className="pl-4 text-center rounded-xl h-12  w-[650px] " required placeholder="Add task" type="text" />
-            <div className=" relative ">
-              <IoMdArrowDropup onClick={handleUpArrowClick} className="absolute -top-[36px]  cursor-pointer translate-x-[50%] text-gray-100 text-5xl" />
-              <input value={task.remainingTime} onChange={(e) => setTask({ ...task, remainingTime: parseInt(e.target.value, 10) || 0 })} className="text-center rounded-xl h-12 w-16 ml-4" type="text" />
-              <IoMdArrowDropdown onClick={handleDownArrowClick} className="absolute -bottom-[36px] cursor-pointer translate-x-[50%] text-gray-100 text-5xl" />
+        {/* <div className="flex flex-col items-center mt-8 sm:mt-16 text-xl sm:text-2xl font-bold text-white mb-10">
+          <p className="mb-4 sm:mb-0 sm:mr-20">Tasks</p>
+          <div className="text-gray-600 flex flex-col sm:flex-row items-center w-full sm:w-auto">
+            <input
+              value={task.title}
+              onChange={handleInputChange}
+              className="pl-4 text-center rounded-xl h-12 w-full sm:w-[650px] mb-4 sm:mb-0"
+              required
+              placeholder="Add task"
+              type="text"
+            />
+            <div className="relative flex items-center mb-4 sm:mb-0">
+              <IoMdArrowDropup
+                onClick={handleUpArrowClick}
+                className="cursor-pointer text-gray-100 text-5xl mr-2"
+              />
+              <input
+                value={task.remainingTime}
+                onChange={(e) =>
+                  setTask({
+                    ...task,
+                    remainingTime: parseInt(e.target.value, 10) || 0,
+                  })
+                }
+                className="text-center rounded-xl h-12 w-16"
+                type="text"
+              />
+              <IoMdArrowDropdown
+                onClick={handleDownArrowClick}
+                className="cursor-pointer text-gray-100 text-5xl ml-2"
+              />
             </div>
-            <button onClick={handleAddTask} className=" border-4 p-1 px-1 ml-6 rounded-xl text-white">
+            <button
+              onClick={handleAddTask}
+              className="border-4 p-1 px-1 rounded-xl text-white mt-4 sm:mt-0 sm:ml-6"
+            >
               <FiPlus className="text-4xl" />
-            </button> 
+            </button>
           </div>
-          <p className="ml-20">See all</p>
+          <p className="mt-4 sm:mt-0 sm:ml-20">See all</p>
+        </div> */}
+        <div className="space-y-6">
+          {tasks.map((item) => (
+            <Task key={item.id} data={item} />
+          ))}
         </div>
-        {tasks.map((item) => {
-          return <Task data={item} />;
-        })}
-  
-        <div className="bg-slate-200 h-1 rounded-2xl w-[400px] mx-auto my-20"></div>
-        <div className="flex justify-evenly pb-56">
+        <div className="bg-slate-200 h-1 rounded-2xl w-full sm:w-[400px] mx-auto my-20"></div>
+        <div className="flex flex-col sm:flex-row justify-evenly pb-16 sm:pb-56">
           <TaskCard />
         </div>
       </div>
